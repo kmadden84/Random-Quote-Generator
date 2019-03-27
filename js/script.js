@@ -43,15 +43,12 @@ function printQuote(message) {
 
     if (displayRandomQuote.citation != null && displayRandomQuote.year != null) {
         message += '<span class="citation">' + displayRandomQuote.citation + '</span><span class="year">' + displayRandomQuote.year + '</span></p>';
-        //outputDiv.innerHTML = message;
     }
     if (displayRandomQuote.citation != null && !displayRandomQuote.year) {
         message += '<span class="citation">' + displayRandomQuote.citation + '</p>';
-        //outputDiv.innerHTML = message;
     }
     if (!displayRandomQuote.citation && displayRandomQuote.year != null) {
         message += '<span class="year">' + displayRandomQuote.year + '</span></p>';
-        //outputDiv.innerHTML = message;
     } 
     else {
         message += '</p>';
