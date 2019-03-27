@@ -17,10 +17,10 @@ function print(message) {
 }
 
 // Loop through quotes and sources, assign random number as the index 
-//for (i=1; i < quotes.length; i+=1) {
+
 displayRandomQuote = quotes[random].quote;
 displayRandomSource = quotes[random].source;
-//}
+
 
 // Display random quote and source
 message = '<p>Quote: ' + displayRandomQuote + '</p><p>Source: ' + displayRandomSource + '</p>'
