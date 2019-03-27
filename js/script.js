@@ -26,7 +26,7 @@ function getRandomQuote() {
 2) empty "message" variable created to house innerHTML
 3) random number used to assign index to one of the objects in the array, therefore selecting a random quote
 4) variable "outputDiv" select parent Div of the innerHTML
-5) message variable built out with, by default, Quotes and Sources - as these are contained in every object. P tag left open in case of further content
+5) message variable built out with, by default, Quotes and Sources - as these are contained in every object. P tag left open in case of further content.
 6) IF statements check if there are citations and/or years, and innerHTML is built out accordingly.  Finally, if no further content is available, p tag is closed.
 
 ***/
