@@ -12,7 +12,7 @@ project 1 - A Random Quote Generator
 
 
 /***
-1) Generate and return a random number
+1) Generate and return a random number (0-7)
 ***/
 
 function getRandomQuote() {
