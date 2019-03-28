@@ -9,15 +9,20 @@ body {
   font-family: 'Playfair Display', serif;
 }
 
-#quote-box {
+#quote-box, #category {
   position: absolute;
-  top: 20%;
   left: 10%;
   right: 10%;
   width: 80%;
   line-height: .5;
 }
-
+#category  {
+  top: 10%;
+  font-size: 1rem;
+}
+#quote-box {
+    top: 20%;
+}
 .quote {
   font-size: 2.5rem;
   font-weight: 400;

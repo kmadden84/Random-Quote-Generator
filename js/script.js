@@ -11,8 +11,29 @@ project 1 - A Random Quote Generator
 ***/
 
 
+// All Variables
+
+// Variables related to changing background color
+var color;
+var bodyElement = document.querySelector('body');
+var shadeOne;
+var shadeTwo;
+var shadeThree;
+
+// Category
+var outputCat;
+var cat;
+
+// Quote
+var outputDiv;
+var message;
+
+//Random Quote object
+var displayRandomQuote;
+
+
 /***
-1) Generate and return a random number (0-7)
+1) Generate and return a random number
 ***/
 
 function getRandomQuote() {
@@ -21,25 +42,40 @@ function getRandomQuote() {
 }
 
 /***
-
 1) random number assinged to "random" variable
-2) empty "message" variable created to house innerHTML
+2) empty "message" and empty "cat" variables created to house innerHTML
 3) random number used to assign index to one of the objects in the array, therefore selecting a random quote
+4) Three random RGB values generated for random background color
 4) variable "outputDiv" select parent Div of the innerHTML
-5) message variable built out with, by default, Quotes and Sources - as these are contained in every object. P tag left open in case of further content.
+5) message variable built out with, by default, Quotes and Sources - as these are contained in every object. P tag left open in case of further content
 6) IF statements check if there are citations and/or years, and innerHTML is built out accordingly.  Finally, if no further content is available, p tag is closed.
-7) final version of the message is created based on conditional statements.
-
+7) Category, Quote and new background color generated
 ***/
+
+
+
+
+
 
 function printQuote(message) {
     random = getRandomQuote();
-    var message = '';
+    message = '';
+    cat = '';
     displayRandomQuote = quotes[random];
-    var outputDiv = document.getElementById('quote-box');
+    outputDiv = document.getElementById('quote-box');
+    outputCat = document.getElementById('category');
+
+    shadeOne = Math.floor(Math.random() * 256);
+    shadeTwo = Math.floor(Math.random() * 256);
+    shadeThree = Math.floor(Math.random() * 256);
+    color = 'rgb(';
+    color += shadeOne + ',';
+    color += shadeTwo + ',';
+    color += shadeThree + ')';
 
     message += '<p class="quote">' + displayRandomQuote.quote + '</p>';
     message += '<p class="source">' + displayRandomQuote.source;
+    cat += '<p>Category: ' + displayRandomQuote.category + '</p>';
 
     if (displayRandomQuote.citation != null && displayRandomQuote.year != null) {
         message += '<span class="citation">' + displayRandomQuote.citation + '</span><span class="year">' + displayRandomQuote.year + '</span></p>';
@@ -49,11 +85,13 @@ function printQuote(message) {
     }
     if (!displayRandomQuote.citation && displayRandomQuote.year != null) {
         message += '<span class="year">' + displayRandomQuote.year + '</span></p>';
-    } 
-    else {
+    } else {
         message += '</p>';
     }
+
     outputDiv.innerHTML = message;
+    outputCat.innerHTML = cat;
+    bodyElement.style.backgroundColor = color;
 }
 
 /***
@@ -65,5 +103,8 @@ function printQuote(message) {
 
 document.getElementById('loadQuote').addEventListener("click", printQuote, true);
 
+// Quote, background and category automatically change after 20 seconds
 
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
+window.addEventListener('load', function() {
+    setInterval(printQuote, 20000);
+}, false);
