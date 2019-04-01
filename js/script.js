@@ -11,100 +11,64 @@ project 1 - A Random Quote Generator
 ***/
 
 
-// All Variables
-
-// Variables related to changing background color
-var color;
-var bodyElement = document.querySelector('body');
-var shadeOne;
-var shadeTwo;
-var shadeThree;
-
-// Category
-var outputCat;
-var cat;
-
-// Quote
-var outputDiv;
-var message;
-
-//Random Quote object
-var displayRandomQuote;
 
 
-/***
-1) Generate and return a random number
-***/
+// Global Variables
+
+const bodyElement = document.querySelector('body');
+const outputDiv = document.getElementById('quote-box');   // specify quote container
+const outputcategory = document.getElementById('category');    // define category container
+
+
+//Generate and return a random number
+
 
 function getRandomQuote() {
     randomNumber = Math.floor(Math.random() * 8);
     return randomNumber;
 }
 
-/***
-1) random number assinged to "random" variable
-2) empty "message" and empty "cat" variables created to house innerHTML
-3) random number used to assign index to one of the objects in the array, therefore selecting a random quote
-4) Three random RGB values generated for random background color
-4) variable "outputDiv" select parent Div of the innerHTML
-5) message variable built out with, by default, Quotes and Sources - as these are contained in every object. P tag left open in case of further content
-6) IF statements check if there are citations and/or years, and innerHTML is built out accordingly.  Finally, if no further content is available, p tag is closed.
-7) Category, Quote and new background color generated
-***/
+// Define random quote/color/category functionality 
 
-
-
-
-
-
-function printQuote(message) {
-    random = getRandomQuote();
-    message = '';
-    cat = '';
-    displayRandomQuote = quotes[random];
-    outputDiv = document.getElementById('quote-box');
-    outputCat = document.getElementById('category');
-
-    shadeOne = Math.floor(Math.random() * 256);
-    shadeTwo = Math.floor(Math.random() * 256);
-    shadeThree = Math.floor(Math.random() * 256);
-    color = 'rgb(';
+function printQuote() {
+    let random = getRandomQuote();                          // random number assinged to "random" variable
+    let message = '';                                       // empty "message" variable to house house innerHTML
+    let category = '';                                      // empty "category" variables created to
+    let displayRandomQuote = quotes[random];                // random number used to assign index to one of the objects in the array, therefore selecting a random quote
+    const shadeOne = Math.floor(Math.random() * 256);         
+    const shadeTwo = Math.floor(Math.random() * 256);        //Three random RGB values generated for random background color
+    const shadeThree = Math.floor(Math.random() * 256);       
+    color = 'rgb(';                                   
     color += shadeOne + ',';
-    color += shadeTwo + ',';
+    color += shadeTwo + ',';                            // color rgb value created from random numbers
     color += shadeThree + ')';
 
-    message += '<p class="quote">' + displayRandomQuote.quote + '</p>';
-    message += '<p class="source">' + displayRandomQuote.source;
-    cat += '<p>Category: ' + displayRandomQuote.category + '</p>';
+    message += '<p class="quote">' + displayRandomQuote.quote + '</p>';   // define message html
+    message += '<p class="source">' + displayRandomQuote.source;          // define message html
+    category += '<p>Category: ' + displayRandomQuote.category + '</p>';   // define category html
 
-    if (displayRandomQuote.citation != null && displayRandomQuote.year != null) {
+    if (displayRandomQuote.citation != null && displayRandomQuote.year != null) {      //what to show if there's a citation and year
         message += '<span class="citation">' + displayRandomQuote.citation + '</span><span class="year">' + displayRandomQuote.year + '</span></p>';
     }
-    if (displayRandomQuote.citation != null && !displayRandomQuote.year) {
+    if (displayRandomQuote.citation != null && !displayRandomQuote.year) {             //what to show if there's a year, but no citation
         message += '<span class="citation">' + displayRandomQuote.citation + '</p>';
     }
-    if (!displayRandomQuote.citation && displayRandomQuote.year != null) {
+    if (!displayRandomQuote.citation && displayRandomQuote.year != null) {             //what to show if there's a citation, but no year
         message += '<span class="year">' + displayRandomQuote.year + '</span></p>';
     } else {
-        message += '</p>';
+        message += '</p>';                                                             // close second p tag
     }
-
-    outputDiv.innerHTML = message;
-    outputCat.innerHTML = cat;
-    bodyElement.style.backgroundColor = color;
+    outputDiv.innerHTML = message;                                                     //append message to message container
+    outputcategory.innerHTML = category;                                               //append category to category container
+    bodyElement.style.backgroundColor = color;                                         //set background as randomly generated color
 }
 
-/***
-  When the "Show another quote" button is clicked, the event listener 
-  below will be triggered, and it will call, or "invoke", the `printQuote` 
-  function. So do not make any changes to the line of code below this 
-  comment.
-***/
+//Click function to generate quote
 
-document.getElementById('loadQuote').addEventListener("click", printQuote, true);
+document.getElementById('loadQuote').addEventListener("click", printQuote, true);    //click function for to call printQuote function and generate quote
 
-// Quote, background and category automatically change after 20 seconds
+//Load function, for automatic quote toggle after 20 seconds
 
 window.addEventListener('load', function() {
-    setInterval(printQuote, 20000);
+    setInterval(printQuote, 20000);  // Quote, background and categoryegory automatically change after 20 seconds
 }, false);
